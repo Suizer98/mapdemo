@@ -66,11 +66,11 @@ function getPosition(position) {
     accuracy = position.coords.accuracy
 
     if (marker) {
-        map_init.removeLayer(marker)
+        map.removeLayer(marker)
     }
 
     if (circle) {
-        map_init.removeLayer(circle)
+        map.removeLayer(circle)
     }
 
     marker = L.marker([lat, long], { icon }).bindPopup('You are here.')
