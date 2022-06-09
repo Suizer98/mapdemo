@@ -24,6 +24,21 @@ var overlays = {};
 L.control.layers(baselayers, overlays).addTo(map);
 
 //mouse
+// Create click event handler
+map.on('click', onMapClick);
+
+
+// The function to create marker on click
+var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent(e.latlng.toString())
+        .openOn(map);
+}
+
+map.on('click', onMapClick);
 
 
 //geolocation
