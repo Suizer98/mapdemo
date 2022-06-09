@@ -73,7 +73,7 @@ function getPosition(position) {
         map_init.removeLayer(circle)
     }
 
-    marker = L.marker([lat, long], { icon })
+    marker = L.marker([lat, long], { icon }).bindPopup('You are here.')
     circle = L.circle([lat, long], { radius: accuracy })
 
     var featureGroup = L.featureGroup([marker, circle]).addTo(map)
@@ -156,9 +156,6 @@ var control = L.Routing.control({
         handleError(e);
     })
     .addTo(map);
-
-
-
 
 
 
