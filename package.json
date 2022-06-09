@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "leaflet-switch-basemap": "^1.0.4"
+  }
+}
