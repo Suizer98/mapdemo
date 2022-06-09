@@ -3,6 +3,12 @@
 // basemap switch
 // https://leaflet-extras.github.io/leaflet-providers/preview/
 // viewport
+window.LRM = {
+	tileLayerUrl: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+	osmServiceUrl: 'https://routing.openstreetmap.de/routed-car/route/v1',
+	orsServiceUrl: 'https://api.openrouteservice.org/geocode/',
+	apiToken: '5b3ce3597851110001cf6248ff41dc332def43858dff1ecccdd19bbc'
+};
 
 var map = L.map('map').setView([1.3521, 103.8198], 12);
 
@@ -37,6 +43,7 @@ function onMapClick(e) {
         .setContent(e.latlng.toString())
         .openOn(map);
 }
+
 
 map.on('click', onMapClick);
 
@@ -105,3 +112,54 @@ geocoder.on('markgeocode', function(event) {
      L.marker2(center).addTo(map);
      map.setView(center, map.getZoom());
 });
+
+//routing
+function button(label, container) {
+    var btn = L.DomUtil.create('button', '', container);
+    btn.setAttribute('type', 'button');
+    btn.innerHTML = label;
+    return btn;
+}
+
+var control = L.Routing.control({
+        router: L.routing.osrmv1({
+			serviceUrl: LRM.osmServiceUrl
+		}),
+        routeWhileDragging: true,
+        plan: new (L.Routing.Plan.extend({
+            createGeocoders: function() {
+                var container = L.Routing.Plan.prototype.createGeocoders.call(this),
+                    reverseButton = button('&#8593;&#8595;', container);
+
+                L.DomEvent.on(reverseButton, 'click', function() {
+                    var waypoints = this.getWaypoints();
+                    this.setWaypoints(waypoints.reverse());
+                }, this);
+
+                return container;
+            }
+        }))([
+            L.latLng(0, 0),
+            L.latLng(0, 0)
+        ], {
+            geocoder: L.Control.Geocoder.nominatim(),
+            routeWhileDragging: true
+        })
+    })
+    .on('routingerror', function(e) {
+        try {
+            map.getCenter();
+        } catch (e) {
+            map.fitBounds(L.latLngBounds(control.getWaypoints().map(function(wp) { return wp.latLng; })));
+        }
+
+        handleError(e);
+    })
+    .addTo(map);
+
+
+
+
+
+
+  
