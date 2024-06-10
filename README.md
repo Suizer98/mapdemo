@@ -14,6 +14,9 @@ https://suizer98.github.io/mapdemo/
 2. Some leaflet Apis
 3. Simple CSS and HTML
 
+Tech stacks:
+![Tech stacks](https://skillicons.dev/icons?i=js,css,html,github,githubactions)
+
 # Features
 
 1. Toggling tile layers
