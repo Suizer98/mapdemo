@@ -8,20 +8,17 @@ I was required to complete this project within 24 hours for a company's intervie
 The website is accessible on:
 https://suizer98.github.io/mapdemo/
 
-# Stack
+# Tech Stacks
 
 1. Leafletjs
 2. Some leaflet Apis
 3. Simple CSS and HTML
 
-Tech stacks:
 ![Tech stacks](https://skillicons.dev/icons?i=js,css,html,github,githubactions)
 
 # Features
 
 1. Toggling tile layers
 2. Navigation function
-3. Address search box
-4. Geolocation 
-
-
+3. Geocoding for address search box
+4. Track user geolocation
