@@ -139,8 +139,8 @@ var control = L.Routing.control({
                 return container;
             }
         }))([
-            L.latLng(0, 0),
-            L.latLng(0, 0)
+            null,
+            null
         ], {
             geocoder: L.Control.Geocoder.nominatim(),
             routeWhileDragging: true
